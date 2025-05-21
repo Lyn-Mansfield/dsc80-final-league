@@ -22,9 +22,11 @@ team_rows['firstblood'] = team_rows['firstblood'].astype(str)
 team_rows['result'] = team_rows['result'].astype(str)
 
 
-w_first_blood = team_rows.query("firstblood == '1'")
-wo_first_blood = team_rows.query("firstblood == '0'")
+#w_first_blood = team_rows.query("firstblood == '1'")
+#wo_first_blood = team_rows.query("firstblood == '0'")
 
 
-fig = px.histogram(w_first_blood, x='result')
-fig.show()
+#fig = px.histogram(w_first_blood, x='result')
+#fig.show()
+
+print(float('11'))
