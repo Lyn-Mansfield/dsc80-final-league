@@ -46,6 +46,22 @@ def clean_lol_data(dataframe):
 	# turn date column into pd.Datetime
 	df_copy['date'] = pd.to_datetime(df_copy['date'])
 
+	# for boolean columns, give special treatment
+	boolean_columns = ['firstblood', 'firstbloodkill', 'firstbloodassist', 'firstbloodvictim', 'monsterkillsownjungle', 'monsterkillsenemyjungle']
+	def transform_int_to_bool(x):
+		if x == 1:
+			return True
+		if x == 0:
+			return False
+		if x == -1:
+			return np.nan
+	for column in boolean_columns:
+		df_copy[column] = df_copy[column].apply(transform_int_to_bool)
+
+	# clearly label if players won or lost
+	df_copy['result'] = df_copy['result'].apply(lambda x: 'Won' if x == 1 else 'Lost')
+
+	print(df_copy.columns)
 	# drop unneeded rows
 	random_game_columns = [df_copy.columns[i] for i in range(45, 76)]
 	df_copy = df_copy.drop(random_game_columns, axis=1)
