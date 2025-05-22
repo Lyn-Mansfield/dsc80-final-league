@@ -14,7 +14,12 @@ num_missing = data.apply(pd.isna).sum()
 num_missing = num_missing / data.shape[0] * 100
 
 fig = px.bar(num_missing[num_missing != 0].sort_values(), 
-	labels={'index': 'Column name', 'value': '% missing'},
-	title='Data missing from partial rows'
+	labels={'index': 'Column name', 'value': '% missing'}
 	)
+fig.update_layout(
+    title={
+        'text': 'Data missing from partial rows',
+        'font': {'size': 24}
+    }
+)
 fig.show()
