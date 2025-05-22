@@ -7,21 +7,20 @@ def clean_lol_data(dataframe):
 	df_copy = dataframe.copy()
 
 
-	print("let's make some ints!")
 	# turn int columns into ints
 	for column in df_copy.columns:
 		column_series = df_copy[column]
 		example_entry = column_series[column_series != ''].iloc[0]
-		print(column, example_entry, type(example_entry))
+		# print(column, example_entry, type(example_entry))
 		try:
 			# try to turn first entry into int
 			int(example_entry)
 			# if it can be turned into an int, then transform the whole column, imputing -1 instead of nan
-			print(f"{example_entry} can be turned into an int!")
+			# print(f"{example_entry} can be turned into an int!")
 			df_copy[column] = df_copy[column].apply(lambda x: x if x != '' else '-1')
 			df_copy[column] = df_copy[column].astype(int)
 		except ValueError:
-			print(f"{example_entry} cannot be turned into an int...")
+			# print(f"{example_entry} cannot be turned into an int...")
 			continue
 
 	# turn empty strings into np.NaN, now that we won't poison the int columns
@@ -35,7 +34,7 @@ def clean_lol_data(dataframe):
 
 		column_series = df_copy[column]
 		example_entry = column_series.iloc[column_series.first_valid_index()]
-		print(column, example_entry, type(example_entry))
+		# print(column, example_entry, type(example_entry))
 		try:
 			# try to turn first non-NaN entry into float
 			float(example_entry)
