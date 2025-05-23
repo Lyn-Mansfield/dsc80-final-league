@@ -61,7 +61,7 @@ def clean_lol_data(dataframe):
 	# clearly label if players won or lost
 	df_copy['result'] = df_copy['result'].apply(lambda x: 'Won' if x == 1 else 'Lost')
 
-	print(df_copy.columns)
+	#print(df_copy.columns)
 	# drop unneeded rows
 	random_game_columns = [df_copy.columns[i] for i in range(45, 76)]
 	df_copy = df_copy.drop(random_game_columns, axis=1)
